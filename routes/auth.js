@@ -1,9 +1,17 @@
 const express = require('express');
-
+const {check,validationResult} = require('express-validator');
+const auth = require('../middleware/auth');
 const router = express.Router();
+const authController = require('../controllers/auth');
 
-router.post('/',(req,res)=>{
-  res.json({msg:"Auth"})
-})
+
+// get logged in user
+router.get('/',auth,authController.getUser);
+
+//login route
+router.post('/',[
+  check('email','Please enter a valid Email').isEmail(),
+  check('password',"Password is required").exists()
+],authController.login);
 
 module.exports = router;
