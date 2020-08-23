@@ -8,24 +8,8 @@ const {check,validationResult} = require('express-validator');
 exports.getAllContact = async(req,res)=>{
   try {
     const contacts = await Contact.find({user:req.user.id}).sort({date:-1});
-    const allContacts = {
-      count:contacts.length,
-      items:contacts.map(cont=>{
-        return{
-          name:cont.name,
-          email:cont.email,
-          phone:cont.phone,
-          type:cont.type,
-          user:cont.user,
-          request:{
-            method:"GET",
-            url:'http://localhost:5000/api/contact/'+cont.id
-          }
-        }
 
-      })
-    };
-    res.json({contacts:allContacts});
+    res.json(contacts);
   } catch (err) {
     console.log(err.message);
     res.status(500).json({msg:"Server Error"});
@@ -49,17 +33,8 @@ exports.storeContact = async(req,res)=>{
       type
     });
     const contact = await newContact.save();
-    const savedContact = {
-      name:contact.name,
-      email:contact.email,
-      phone:contact.phone,
-      type:contact.type,
-      request:{
-        method:"GET",
-        url:'http://localhost:5000/api/contact/'+contact.id
-      }
-    }
-    res.status(200).json({contact:savedContact});
+
+    res.status(200).json(contact);
   } catch (err) {
     console.log(err.message);
     res.status(500).json({msg:"Server Error"});
@@ -102,7 +77,7 @@ exports.updateContact = async(req,res)=>{
 
   try {
     const updatedContact = await Contact.updateOne({_id:req.params.id},{$set:req.body});
-    res.status(200).json({msg:"Contact Updated"});
+    res.status(200).json({msg:"Contact Updated",updatedContact});
   } catch (err) {
     console.log(err.message);
     res.status(500).json({msg:"Server Error"});

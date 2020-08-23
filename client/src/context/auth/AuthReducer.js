@@ -25,6 +25,51 @@ const AuthReducer = (state,action)=>{
         ...state,
         error:null
       }
+    case actionTypes.USER_LOADED:
+      return{
+        ...state,
+        isAuthenticated:true,
+        loading:false,
+        user:action.payload
+      }
+    case actionTypes.AUTH_ERROR:
+      localStorage.removeItem('token');
+      return{
+        ...state,
+        token:null,
+        isAuthenticated:false,
+        loading:false,
+        user:null,
+        error:null
+      }
+    case actionTypes.LOGIN_SUCCESS:
+    localStorage.setItem('token',action.payload.token);
+      return{
+        ...state,
+        ...action.payload,
+        isAuthenticated:true,
+        loading:false
+      }
+    case actionTypes.LOGIN_FAIL:
+      localStorage.removeItem('token');
+      return{
+        ...state,
+        token:null,
+        isAuthenticated:false,
+        loading:false,
+        user:null,
+        error:action.payload
+      }
+    case actionTypes.LOGOUT:
+      localStorage.removeItem('token');
+      return{
+        ...state,
+        token:null,
+        isAuthenticated:false,
+        loading:false,
+        user:null,
+        error:null
+      }
     default:return state;
 
   }

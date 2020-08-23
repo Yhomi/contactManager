@@ -1,9 +1,12 @@
 import React,{useState,useContext,useEffect} from 'react';
 import ContactContext from '../../context/contact/contactContext';
+import AlertContext from '../../context/alert/AlertContext';
 
 const ContactForm = (props) => {
   const contactContext = useContext(ContactContext);
+  const alertContext = useContext(AlertContext);
   const {addContact,current,clearCurrent,updateContact} = contactContext;
+  const {setAlert} = alertContext;
 
   useEffect(()=>{
     if(current !== null){
@@ -39,7 +42,9 @@ const ContactForm = (props) => {
   const submitHandler = (e)=>{
     e.preventDefault();
     if(current === null){
-      // add contact function in contextState
+      if(name === '' ){
+        setAlert('Please Enter a name','danger');
+      }
       addContact(contact);
     }else {
       //update contact
