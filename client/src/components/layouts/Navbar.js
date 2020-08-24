@@ -42,7 +42,7 @@ const Navbar = props =>{
   return(
     <div className="navbar bg-primary">
       <h1>
-        <i className="fas fa-id-card-alt" /> ContactKeeper
+        <i className="fas fa-id-card-alt" /> ContactManager
       </h1>
       <ul>
         {
