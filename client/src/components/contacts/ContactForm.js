@@ -1,12 +1,10 @@
 import React,{useState,useContext,useEffect} from 'react';
 import ContactContext from '../../context/contact/contactContext';
-import AlertContext from '../../context/alert/AlertContext';
+
 
 const ContactForm = (props) => {
   const contactContext = useContext(ContactContext);
-  const alertContext = useContext(AlertContext);
   const {addContact,current,clearCurrent,updateContact} = contactContext;
-  const {setAlert} = alertContext;
 
   useEffect(()=>{
     if(current !== null){
@@ -42,9 +40,6 @@ const ContactForm = (props) => {
   const submitHandler = (e)=>{
     e.preventDefault();
     if(current === null){
-      if(name === '' ){
-        setAlert('Please Enter a name','danger');
-      }
       addContact(contact);
     }else {
       //update contact
@@ -63,9 +58,9 @@ const ContactForm = (props) => {
   return (
     <form onSubmit={submitHandler}>
       <h2 className="text-primary">{current ? "Edit Contact" : "Add Contact"}</h2>
-      <input type="text" name="name" placeholder="Enter Name" value={name} onChange={changehandler} />
-      <input type="email" name="email" placeholder="Enter Email" value={email} onChange={changehandler} />
-      <input type="text" name="phone" placeholder="Enter Phone Number" value={phone} onChange={changehandler} />
+      <input type="text" name="name" placeholder="Enter Name" value={name} onChange={changehandler} required />
+      <input type="email" name="email" placeholder="Enter Email" value={email} onChange={changehandler} required />
+      <input type="text" name="phone" placeholder="Enter Phone Number" value={phone} onChange={changehandler} required />
       <h5>Contact Type</h5>
       <input type="radio" name="type" value="personal" checked={type === 'personal'} onChange={changehandler} /> Personal{' '}
       <input type="radio" name="type" value="professional" checked={type === 'professional'} onChange={changehandler} /> Professional

@@ -14,7 +14,6 @@ const ContactItem = ({contact}) => {
 
   const editHandler = (currentContact)=>{
     setCurrent(currentContact);
-    
   }
   return (
     <div className="card bg-light">

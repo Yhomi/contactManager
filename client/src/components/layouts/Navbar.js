@@ -20,7 +20,10 @@ const Navbar = props =>{
         <li>
           <Link to="/about" >About</Link>
         </li>
-      <li><a href="#" onClick={onLogout}><i  className="fas fa-sign-out-alt"/><span className="hide-sm"></span>Logout</a></li>
+      <li>
+        {/* eslint-disable-next-line */}
+        <a href="#" onClick={onLogout}><i  className="fas fa-sign-out-alt"/><span className="hide-sm"></span>Logout</a>
+    </li>
     </Fragment>
   );
   const guestLinks = (

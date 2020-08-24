@@ -64,6 +64,7 @@ const ContactState = props =>{
     try {
       const result = await axios.patch(`/api/contact/${contact._id}`,contact,config);
        dispatch({type:actionTypes.UPDATE_CONTACT,payload:result.data});
+       getContacts();
     } catch (err) {
       dispatch({type:actionTypes.CONTACT_ERROR,payload:err.response.msg});
     }

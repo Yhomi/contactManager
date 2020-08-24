@@ -17,8 +17,5 @@ app.use('/api/contact',contactRoutes);
 app.use('/api/users',usersRoutes);
 app.use('/api/auth',authRoutes);
 
-app.get('/',(req,res)=>{
-  res.json({msg:"Welcome to the Contact Keeper API"});
-});
 
 app.listen(PORT,()=>console.log(`Server started on port: ${PORT}`));

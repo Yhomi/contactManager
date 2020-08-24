@@ -11,7 +11,7 @@ const Login = (props) => {
 
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
-  const {login,loadUser,isAuthenticated,error,clearError} = authContext;
+  const {login,isAuthenticated,error,clearError} = authContext;
   const {setAlert} = alertContext;
 
   useEffect(()=>{
@@ -22,6 +22,7 @@ const Login = (props) => {
       setAlert(error, 'danger');
       clearError();
     }
+    // eslint-disable-next-line
   },[error,isAuthenticated,props.history])
 
   const {email,password} = user;
